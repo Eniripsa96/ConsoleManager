@@ -1,0 +1,5 @@
+name: ConsoleManager
+main: com.sucy.log.ConsoleManager
+author: Eniripsa96
+version: 1.0
+load: STARTUP

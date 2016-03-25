@@ -1,0 +1,28 @@
+# Each option represents a different available
+# logging level. You can turn them on/off individually.
+# For controlling specific plugins, add the plugin of
+# interest to the "specifics" section by adding it's
+# name followed by the options under the "plugins" section.
+# LogManager was added as an example, although it doesn't
+# really log anything outside of errors.
+keep-done-message: true
+minecraft:
+  fatal: true
+  error: true
+  warn: true
+  info: false
+  trace: false
+  debug: false
+bukkit:
+  severe: true
+  warn: true
+  info: false
+plugins:
+  severe: true
+  warn: true
+  info: false
+specifics:
+  LogManager:
+    severe: true
+    warn: true
+    info: false
