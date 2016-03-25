@@ -36,6 +36,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import java.lang.reflect.Field;
 import java.util.HashMap;
+import java.util.logging.Handler;
+import java.util.logging.Logger;
 
 /**
  * Simple utility for controlled what plugins and the server log to the console
@@ -117,8 +119,10 @@ public class ConsoleManager extends JavaPlugin implements Listener
             config.save();
             loadLevels(config.getConfig());
 
-            Bukkit.getLogger().setUseParentHandlers(false);
-            Bukkit.getLogger().addHandler(new JavaHandler());
+            Logger rootLogger = getServer().getLogger().getParent();
+            for (Handler handler : rootLogger.getHandlers())
+                rootLogger.removeHandler(handler);
+            rootLogger.addHandler(new JavaHandler());
 
             nms = getServer().getClass().getPackage().getName();
             nms = "net.minecraft.server" + nms.substring(nms.lastIndexOf('.')) + '.';
@@ -132,8 +136,6 @@ public class ConsoleManager extends JavaPlugin implements Listener
         catch (Exception ex)
         {
             getLogger().severe("Failed to set up logging utilities. Please notify Eniripsa96 with your server version");
-            ex.printStackTrace();
-
         }
     }
 
@@ -210,8 +212,6 @@ public class ConsoleManager extends JavaPlugin implements Listener
             }
             catch (Exception ex2)
             {
-
-                ex2.printStackTrace();
                 return;
             }
         }
